@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image } from 're
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 
-const Main = () => {
+const Main = ({ navigation, login }) => {
     let [fontsLoaded] = useFonts({
         Ubuntu_500Medium,
         Ubuntu_400Regular
@@ -13,15 +13,16 @@ const Main = () => {
         return <AppLoading />;
       }
     return (
-        <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <View style={styles.mainContainer}>
             <Image style={styles.image} source={require(`../../assets/cat.jpg`)}/>
-            <TouchableHighlight style={styles.btn}>
+            <Text style={styles.loginText}>{login}</Text>
+            <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('Cats')}>
                 <Text style={[styles.btnText, {fontFamily: 'Ubuntu_500Medium'}]}>Все котики</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.btn}>
+            <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('AddCat')}>
                 <Text style={[styles.btnText, {fontFamily: 'Ubuntu_500Medium'}]}>Добавить котика</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.exitBtn}>
+            <TouchableHighlight style={styles.exitBtn} onPress={() => navigation.navigate('Auth')}>
                 <Text style={[styles.exitBtnText, {fontFamily: 'Ubuntu_500Medium'}]}>Выйти</Text>
             </TouchableHighlight>
         </View>
@@ -32,6 +33,12 @@ export default Main;
 
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#04454D',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     image: {
         borderRadius: '50%',
         width: 123, 
@@ -64,6 +71,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     exitBtnText: {
+        color: '#04BA71',
+        fontSize: 24,
+        lineHeight: 28,
+        textTransform: 'uppercase'
+    }, 
+    loginText: {
+        marginBottom: 20,
         color: '#04BA71',
         fontSize: 24,
         lineHeight: 28,

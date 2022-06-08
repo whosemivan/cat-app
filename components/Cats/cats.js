@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View, Text } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 
 import Cat from './props/cat';
 
 
-export default function Cats() {
+export default function Cats({data}) {
     let [fontsLoaded] = useFonts({
         Ubuntu_500Medium,
         Ubuntu_400Regular
@@ -38,7 +38,7 @@ export default function Cats() {
             <TextInput style={styles.searchInput} onChangeText={findCat} placeholder="Поиск по имени.." placeholderTextColor="#F5F2EB96" />
 
             <View>
-                {cats.map(cat => <Cat key={cat.id} image={cat.img_link} name={cat.name} rate={cat.rate} /> )}
+                {data ? <Text>Котиков пока нет</Text> : data.map(cat => <Cat key={cat.id} image={cat.img_link} name={cat.name} rate={cat.rate} />)}
             </View>
         </View>
     );

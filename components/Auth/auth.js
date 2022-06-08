@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 
-const Auth = () => {
+const Auth = ({ navigation, setLogin, onSubmitBtnClick }) => {
+
     let [fontsLoaded] = useFonts({
         Ubuntu_500Medium,
         Ubuntu_400Regular
@@ -17,10 +18,15 @@ const Auth = () => {
        <View style={styles.mainContainer}>
            <View style={styles.form}>
                <Text style={[styles.formTitle, {fontFamily: 'Ubuntu_500Medium'}]}>Авторизация</Text>
-                <TextInput style={styles.formInput} placeholder="Ваш логин.."/>
+                <TextInput style={styles.formInput} placeholder="Ваш логин.." onChange={(value) => {
+                    setLogin(value.nativeEvent.text);
+                }}/>
            </View>
 
-           <TouchableHighlight style={styles.btn}>
+           <TouchableHighlight style={styles.btn} onPress={() => {
+               navigation.navigate('Main')
+               onSubmitBtnClick();
+            }}>
                 <Image style={styles.iconBtn} source={require('../../assets/auth-icon.png')} />
            </TouchableHighlight>
        </View>
@@ -30,6 +36,12 @@ const Auth = () => {
 export default Auth;
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#04454D',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     form: {
         backgroundColor: '#F5F2EB',
         width: 280,
