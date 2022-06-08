@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Auth from './components/Auth/auth';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Cat app!</Text>
+      <Auth/>
     </View>
   );
 }
@@ -12,7 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#04454D',
     alignItems: 'center',
     justifyContent: 'center',
   },
