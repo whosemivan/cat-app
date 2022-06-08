@@ -6,7 +6,7 @@ import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium } from '@expo-google-font
 import Cat from './props/cat';
 
 
-export default function Cats({data}) {
+export default function Cats({navigation, data}) {
     let [fontsLoaded] = useFonts({
         Ubuntu_500Medium,
         Ubuntu_400Regular
@@ -15,18 +15,6 @@ export default function Cats({data}) {
     if (!fontsLoaded) {
         return <AppLoading />;
     }
-
-    const cats = [
-        {
-            "name": "Лара",
-            "img_link": "https://www.friendforpet.ru/api/sites/default/files/2021-09/167200DD-A44F-4845-8D4D-ACCFC180165A.jpeg",
-            "age": 8,
-            "rate": 7,
-            "favourite": false,
-            "description": "Лара – шотландская вислоухая, у нее остеохондродисплазия. Лара спокойная, очень ласковая и контактная. Болезнь не лечится и специального ухода не нужно.",
-            "id": 1
-        }
-    ]
 
     const findCat = () => {
         console.log("Поиск кошки по имени");
@@ -38,7 +26,7 @@ export default function Cats({data}) {
             <TextInput style={styles.searchInput} onChangeText={findCat} placeholder="Поиск по имени.." placeholderTextColor="#F5F2EB96" />
 
             <View>
-                {data ? <Text>Котиков пока нет</Text> : data.map(cat => <Cat key={cat.id} image={cat.img_link} name={cat.name} rate={cat.rate} />)}
+                {data == null ? <Text>Котиков пока нет</Text> : data.data.map(cat => <Cat navigation={navigation} key={cat.id} id={cat.id} image={cat.img_link} name={cat.name} rate={cat.rate} />)}
             </View>
         </View>
     );
@@ -47,10 +35,11 @@ export default function Cats({data}) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        minHeight: "100%",
         paddingTop: 100,
         paddingLeft: 20,
         paddingRight: 20,
+        paddingBottom: 50,
         backgroundColor: '#04454D',
     },
     searchInput: {
@@ -58,7 +47,6 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: "auto",
         color: "#F5F2EB",
-        // fontFamily: NunitoRegular,
         fontSize: 18,
         textAlign: "center",
         borderBottomColor: '#F5F2EB96',

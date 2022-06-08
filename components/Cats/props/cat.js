@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, Image, View } from 'react-native';
 
 
-export default function Cat(props) {
-    const {image, name, rate} = props;
-
+export default function Cat({ navigation, image, name, rate, id}) {
     const createRate = (rateCount) => {
         let rateArray = {line1: [], line2: []};
         for(let i = 1; i <= 10; ++i) {
@@ -37,7 +35,9 @@ export default function Cat(props) {
             <Image style={styles.image} source={{uri: image}} />
             <Text style={[styles.title, {fontFamily: 'Ubuntu_500Medium'}]}>{name}</Text>
             {createRate(rate)}
-            <Text style={styles.link}>узнать больше</Text>
+            <TouchableHighlight style={styles.link} onPress={() => navigation.navigate('CatPage', {id: id})}>
+                <Text style={[styles.linkText, {fontFamily: 'Ubuntu_500Medium'}]}>узнать больше</Text>
+            </TouchableHighlight>
         </View>
     );
 }
@@ -78,9 +78,11 @@ const styles = StyleSheet.create({
     link: {
         height: 25,
         marginTop: "auto",
-        color: "#04454D",
         backgroundColor: "#04BA71",
+    },
+    linkText: {
+        color: "#04454D",
         fontSize: 18,
         textAlign: "center",
-    },
+    }
 });
