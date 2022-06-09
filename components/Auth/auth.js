@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     formInput: {
         borderBottomColor: '#04454D',
         borderBottomWidth: 2,
-        width: 130,
         textAlign: 'center',
         fontSize: 18
     },

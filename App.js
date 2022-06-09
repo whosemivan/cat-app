@@ -15,8 +15,6 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [login, setLogin] = useState('testLoginForMyAss');
   const [data, setData] = useState();
-  const сatId = useRef();
-
 
   const getCatsData = () => {
     axios
@@ -24,10 +22,11 @@ export default function App() {
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
-        setData(response.data);
+        setData(response.data.data);
       })
       .catch((e) => console.log('something went wrong :(', e));
   };
+  useEffect(() => getCatsData(), []);
 
 
   return (
@@ -37,7 +36,7 @@ export default function App() {
           {props => <Auth {...props} setLogin={setLogin} />}
         </Stack.Screen>
         <Stack.Screen name="Main" options={{ title: 'Главная' }}>
-          {props => <Main {...props} login={login} getCatsData={getCatsData} />}
+          {props => <Main {...props} login={login} />}
         </Stack.Screen>
         <Stack.Screen name="Cats" options={{ title: 'Каты =)' }} >
           {props => <Cats {...props} data={data} />}
@@ -46,7 +45,7 @@ export default function App() {
           {props => <CatPage {...props} login={login} />}
         </Stack.Screen>
         <Stack.Screen name="AddCat" options={{ title: 'Добавить каата!' }} >
-          {props => <AddCat {...props} login={login} />}
+          {props => <AddCat {...props} login={login} getCatsData={getCatsData} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

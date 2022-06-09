@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
 
-const AddCat = ({navigation, login}) => {
+const AddCat = ({navigation, login, getCatsData}) => {
 
-    const [catData, setCatData] = useState({id: Date.now()});
+    const [catData, setCatData] = useState({name: "Имя кошки", img_link: "https://miro.medium.com/max/1200/1*BomiWkQi5XB5A4KpQziJpw.jpeg", age: 5, rate: 10, description: "Описание котейки", id: Date.now()});
 
     const postCat = (catData) => {
         const headers = { 'header-name': 'value' };
@@ -18,6 +18,7 @@ const AddCat = ({navigation, login}) => {
             .then((response) => {
                 console.log(response.status);
                 console.log(response.data);
+                getCatsData();
             })
             .catch((e) => console.log('something went wrong :(', e));
     };
@@ -25,19 +26,19 @@ const AddCat = ({navigation, login}) => {
 
     return (
         <View style={styles.mainContainer}>
-        <View style={styles.form}>
-            <Text style={[styles.formTitle, {fontFamily: 'Ubuntu_500Medium'}]}>Авторизация</Text>
-             <TextInput style={styles.formInput} placeholder="Имя котика)" onChangeText={(value) => setCatData({...catData, name: value})} />
-             <TextInput style={styles.formInput} placeholder="Фото" onChangeText={(value) => setCatData({...catData, img_link: value})} />
-             <TextInput style={styles.formInput} placeholder="Возраст" onChangeText={(value) => setCatData({...catData, age: value})} />
-             <TextInput style={styles.formInput} placeholder="Оценка" onChangeText={(value) => setCatData({...catData, rate: value})} />
-             <TextInput style={[styles.formInput, {marginBottom: 0}]} placeholder="Описание" onChangeText={(value) => setCatData({...catData, description: value})} />
-        </View>
+            <View style={styles.form}>
+                <Text style={[styles.formTitle, {fontFamily: 'Ubuntu_500Medium'}]}>Авторизация</Text>
+                <TextInput style={styles.formInput} placeholder="Имя котика)" onChangeText={(value) => setCatData({...catData, name: value})} />
+                <TextInput style={styles.formInput} placeholder="Фото" onChangeText={(value) => setCatData({...catData, img_link: value})} />
+                <TextInput style={styles.formInput} placeholder="Возраст" onChangeText={(value) => setCatData({...catData, age: value})} />
+                <TextInput style={styles.formInput} placeholder="Оценка" onChangeText={(value) => setCatData({...catData, rate: value})} />
+                <TextInput style={[styles.formInput, {marginBottom: 0}]} placeholder="Описание" onChangeText={(value) => setCatData({...catData, description: value})} />
+            </View>
 
-        <TouchableHighlight style={styles.btn} onPress={() => {navigation.navigate('Main'); postCat(catData)}}>
-            <Text style={[styles.btnText, {fontFamily: 'Ubuntu_500Medium'}]}>Отправить</Text>
-        </TouchableHighlight>
-    </View>
+            <TouchableHighlight style={styles.btn} onPress={() => {navigation.navigate('Main'); postCat(catData)}}>
+                <Text style={[styles.btnText, {fontFamily: 'Ubuntu_500Medium'}]}>Отправить</Text>
+            </TouchableHighlight>
+        </View>
     );
 };
 

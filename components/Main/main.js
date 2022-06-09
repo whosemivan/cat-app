@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import AppLoading from 'expo-app-loading';
 import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 
-const Main = ({ navigation, login, getCatsData }) => {
+const Main = ({ navigation, login }) => {
     let [fontsLoaded] = useFonts({
         Ubuntu_500Medium,
         Ubuntu_400Regular
@@ -16,7 +16,7 @@ const Main = ({ navigation, login, getCatsData }) => {
         <View style={styles.mainContainer}>
             <Image style={styles.image} source={require(`../../assets/cat.jpg`)}/>
             <Text style={styles.loginText}>{login}</Text>
-            <TouchableHighlight style={styles.btn} onPress={() => {navigation.navigate('Cats'); getCatsData()}}>
+            <TouchableHighlight style={styles.btn} onPress={() => {navigation.navigate('Cats')}}>
                 <Text style={[styles.btnText, {fontFamily: 'Ubuntu_500Medium'}]}>Все котики</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.btn} onPress={() => navigation.navigate('AddCat')}>
