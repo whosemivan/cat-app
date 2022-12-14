@@ -17,7 +17,7 @@ const Auth = ({ navigation, setLogin }) => {
        <View style={styles.mainContainer}>
            <View style={styles.form}>
                 <Text style={[styles.formTitle, {fontFamily: 'Ubuntu_500Medium'}]}>Авторизация</Text>
-                <TextInput style={styles.formInput} placeholder="Ваш логин.." defaultValue="testLoginForMyAss" onChangeText={(value) => {
+                <TextInput style={styles.formInput} placeholder="Ваш логин.." defaultValue="Login" onChangeText={(value) => {
                     setLogin(value);
                 }}/>
            </View>
